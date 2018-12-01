@@ -12,17 +12,13 @@ def main(argv):
 
     equations_file = argv[1]
     options = parse_config()
-
-    print('Working.')
-
-    print(equations_file)
-    print(options)
     #paths_info = solve_problems(equations_file, options)
-    string = ocr.getLatexString("api-examples/images/long_division.jpg")
-    string = formatString.formatString(string)
-    print(string)
-    print(string[0])
-    paths_info = solve_problem(string[0], options)
+    string = ocr.getLatexString("test.jpg")
+    print("getLatexString", string)
+    string1 = formatString.formatString(string[0])
+    print("formatString",string1)
+    print(string1[0])
+    paths_info = solve_problem(string1[0], options)
     print(paths_info)
     generate_pdf(paths_info[0])
 
@@ -54,12 +50,14 @@ def solve_problem(query_str, options):
 
     image_num = 0
     print("1",query_str)
-    print("query_str",query_str)
+    print("query_str","Solve " + query_str)
+    query_str = "Solve " + query_str
     result = client.query(query_str)
     print("result",result)
     #result = wolf.WolframAlphaQueryResult(result)
 
     for pod in result.pods:
+        print('pod',pod)
         for subpod in pod.subpods:
             print("subpod",subpod)
             img = subpod.img
