@@ -14,8 +14,4 @@ def getLatexString(dir):
     	headers={"app_id": "devminhhai_gmail_com", "app_key": "ceb7df5d2d13f08405f4",
             "Content-type": "application/json"})
 	data = json.loads(response.text)
-	print data['latex']
 	return [data['latex']]
-
-
-
