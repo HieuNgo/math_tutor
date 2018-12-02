@@ -15,3 +15,4 @@ def getLatexString(dir):
             "Content-type": "application/json"})
 	data = json.loads(response.text)
 	return [data['latex']]
+

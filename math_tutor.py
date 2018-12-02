@@ -12,7 +12,6 @@ def main(argv):
 
     equations_file = argv[1]
     options = parse_config()
-    #paths_info = solve_problems(equations_file, options)
     string = ocr.getLatexString("test.jpg")
     print("getLatexString", string)
     string1 = formatString.formatString(string[0])
@@ -164,12 +163,9 @@ def solve_problems(equations_file, options):
     return paths_info
 
 def generate_pdf(paths_info):
-
-    #dir = paths_info[0]
-    #paths = paths_info[1]
     pdf_bytes = img2pdf.convert(paths_info, dpi=150, x=0, y=0)
     file = open("result/result.pdf","wb")
-
+    
     try:
         file.write(pdf_bytes)
     except IOError:
