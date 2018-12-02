@@ -42,10 +42,7 @@ print(r.text)
 '''
 def formatString(string):
     save = []
-    string = r"\left. \begin{array} { l } { x ^ { 2 } + 2 x = 0 } \\ { x \cdot ( x + 2 ) = 0 } \\ { x = 0 } \\ { x = - 2 } \end{array} \right."
     print(string)
-    string1 = string.strip()
-    print(string1)
     string2 = string.split(r'\\')
     print(string2)
     for s in string2:
@@ -72,8 +69,6 @@ def formatString(string):
             temp1 = temp1[:match.span()[0]]+temp1[match.span()[1]:]
             print(temp1)
             tmp = temp1
-    save.append(tmp)
-    print(save)
+            save.append(tmp)
+    print('save',save)
     return save
-
-string = r"\int _{ 1 } ^ { 3 } \int_ { 0 } ^ { 2 } \operatorname { ln } ( x + y ) d x d y"

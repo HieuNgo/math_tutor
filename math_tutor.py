@@ -1,11 +1,8 @@
 import sys, os, shutil, urllib.request, hashlib
 import wolframalpha
 import img2pdf
-<<<<<<< HEAD
-=======
 import ocr
 import formatString
->>>>>>> refs/remotes/origin/master
 
 server = 'http://api.wolframalpha.com/v2/query.jsp'
 config = 'math_tutor.config'
@@ -15,26 +12,14 @@ def main(argv):
 
     equations_file = argv[1]
     options = parse_config()
-
-    print('Working.')
-
-    print(equations_file)
-    print(options)
-<<<<<<< HEAD
-    paths_info = solve_problems(equations_file, options)
-    generate_pdf(paths_info)
-
-    print   # pretty terminal newline
-=======
-    #paths_info = solve_problems(equations_file, options)
-    string = ocr.getLatexString("api-examples/images/long_division.jpg")
-    string = formatString.formatString(string)
-    print(string)
-    print(string[0])
-    paths_info = solve_problem(string[0], options)
+    string = ocr.getLatexString("test.jpg")
+    print("getLatexString", string)
+    string1 = formatString.formatString(string[0])
+    print("formatString",string1)
+    print(string1[0])
+    paths_info = solve_problem(string1[0], options)
     print(paths_info)
     generate_pdf(paths_info[0])
->>>>>>> refs/remotes/origin/master
 
 def parse_config():
 
@@ -56,8 +41,6 @@ def parse_config():
 
     return options
 
-<<<<<<< HEAD
-=======
 def solve_problem(query_str, options):
     client = wolframalpha.Client(app_id)
     paths_info = []
@@ -66,12 +49,14 @@ def solve_problem(query_str, options):
 
     image_num = 0
     print("1",query_str)
-    print("query_str",query_str)
+    print("query_str","Solve " + query_str)
+    query_str = "Solve " + query_str
     result = client.query(query_str)
     print("result",result)
     #result = wolf.WolframAlphaQueryResult(result)
 
     for pod in result.pods:
+        print('pod',pod)
         for subpod in pod.subpods:
             print("subpod",subpod)
             img = subpod.img
@@ -94,7 +79,6 @@ def solve_problem(query_str, options):
 
     return paths_info
 
->>>>>>> refs/remotes/origin/master
 def solve_problems(equations_file, options):
 
     file = open(equations_file,'r')
@@ -179,19 +163,9 @@ def solve_problems(equations_file, options):
     return paths_info
 
 def generate_pdf(paths_info):
-
-<<<<<<< HEAD
-    dir = paths_info[0]
-    paths = paths_info[1]
-    pdf_bytes = img2pdf.convert(paths, dpi=150, x=0, y=0)
-    file = open(dir + '/' + dir + ".pdf","wb")
-=======
-    #dir = paths_info[0]
-    #paths = paths_info[1]
     pdf_bytes = img2pdf.convert(paths_info, dpi=150, x=0, y=0)
     file = open("result/result.pdf","wb")
->>>>>>> refs/remotes/origin/master
-
+    
     try:
         file.write(pdf_bytes)
     except IOError:
